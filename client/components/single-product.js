@@ -17,6 +17,7 @@ class SingleProduct extends Component {
         <h3>{this.props.product.name}</h3>
         <img src={this.props.product.imageUrl} />
         <h4>{this.props.product.description}</h4>
+        <h4>Price: ${this.props.product.price}</h4>
       </div>
     )
   }
