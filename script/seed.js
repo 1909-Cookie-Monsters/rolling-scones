@@ -1,18 +1,88 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Inventory} = require('../server/db/models')
+
+const customers = [
+  {
+    firstName: 'Samantha',
+    lastName: 'Lastig',
+    email: 'slastig@cookiemonsters.com',
+    password: 'cookiesrock'
+  },
+  {
+    firstName: 'Alvin',
+    lastName: 'Togonon',
+    email: 'atogonon@cookiemonsters.com',
+    password: 'abc123'
+  },
+  {
+    firstName: 'Alex',
+    lastName: 'Paul',
+    email: 'apaul@cookiemonster.com',
+    password: 'alexpassword'
+  },
+  {
+    firstName: 'Maxim',
+    lastName: 'Kaloev',
+    email: 'mkaloev@cookiemonsters.com',
+    password: 'maxpass'
+  },
+  {
+    firstName: 'Austin',
+    lastName: 'Wu',
+    email: 'awe@cookiemonsters.com',
+    password: 'austinpassword'
+  }
+]
+
+const products = [
+  {
+    name: 'chocolate chip',
+    description: 'The chocolatiest chip',
+    quantity: 8,
+    brand: 'nestle'
+  },
+  {
+    name: 'sugar',
+    description: 'basic',
+    quantity: 34,
+    brand: 'keebler'
+  },
+  {
+    name: 'oatmeal',
+    description: 'no raisins',
+    quantity: 100,
+    brand: 'pillsbury'
+  },
+  {
+    name: 'snickerdoodle',
+    description: 'a bit better than sugar',
+    quantity: 1,
+    brand: 'pepperidge farm'
+  },
+  {
+    name: 'ginger snap',
+    description: 'must have grandchildren to order',
+    quantity: 53,
+    brand: 'grandma'
+  }
+]
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
+  const users = await Promise.all(
+    customers.map(customer => User.create(customer))
+  )
+
+  const inventory = await Promise.all(
+    products.map(product => Inventory.create(product))
+  )
 
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${inventory.length} inventory`)
   console.log(`seeded successfully`)
 }
 
