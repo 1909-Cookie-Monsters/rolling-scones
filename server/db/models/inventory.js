@@ -32,7 +32,7 @@ const Inventory = db.define('product', {
     type: Sequelize.STRING,
     allowNull: false,
     defaultValue:
-      'https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwiYrfW7tdPlAhXqUd8KHXEeArMQjRx6BAgBEAQ&url=https%3A%2F%2Ftwitter.com%2Foreo_problems&psig=AOvVaw3FnNbTraevujCvQXClFKR6&ust=1573055191959805'
+      'https://media.istockphoto.com/photos/anzac-biscuit-isolated-clipping-path-picture-id183764572'
   }
 })
 

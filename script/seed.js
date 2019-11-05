@@ -36,6 +36,39 @@ const customers = [
   }
 ]
 
+const products = [
+  {
+    name: 'chocolate chip',
+    description: 'The chocolatiest chip',
+    quantity: 8,
+    brand: 'nestle'
+  },
+  {
+    name: 'sugar',
+    description: 'basic',
+    quantity: 34,
+    brand: 'keebler'
+  },
+  {
+    name: 'oatmeal',
+    description: 'no raisins',
+    quantity: 100,
+    brand: 'pillsbury'
+  },
+  {
+    name: 'snickerdoodle',
+    description: 'a bit better than sugar',
+    quantity: 1,
+    brand: 'pepperidge farm'
+  },
+  {
+    name: 'ginger snap',
+    description: 'must have grandchildren to order',
+    quantity: 53,
+    brand: 'grandma'
+  }
+]
+
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
@@ -44,40 +77,12 @@ async function seed() {
     customers.map(customer => User.create(customer))
   )
 
-  const dummyInventory = await Promise.all([
-    Inventory.create({
-      name: 'chocolate chip',
-      description: 'The chocolatiest chip',
-      quantity: 8,
-      brand: 'nestle'
-    }),
-    Inventory.create({
-      name: 'sugar',
-      description: 'basic',
-      quantity: 34,
-      brand: 'keebler'
-    }),
-    Inventory.create({
-      name: 'oatmeal',
-      description: 'no raisins',
-      quantity: 100,
-      brand: 'pillsbury'
-    }),
-    Inventory.create({
-      name: 'snickerdoodle',
-      description: 'a bit better than sugar',
-      quantity: 1,
-      brand: 'pepperidge farm'
-    }),
-    Inventory.create({
-      name: 'ginger snap',
-      description: 'must have grandchildren to order',
-      quantity: 53,
-      brand: 'grandma'
-    })
-  ])
+  const inventory = await Promise.all(
+    products.map(product => Inventory.create(product))
+  )
 
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${inventory.length} inventory`)
   console.log(`seeded successfully`)
 }
 
