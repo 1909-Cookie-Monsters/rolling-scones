@@ -49,36 +49,31 @@ async function seed() {
       name: 'chocolate chip',
       description: 'The chocolatiest chip',
       quantity: 8,
-      brand: 'nestle',
-      imageUrl: ''
+      brand: 'nestle'
     }),
     Inventory.create({
       name: 'sugar',
       description: 'basic',
       quantity: 34,
-      brand: 'keebler',
-      imageUrl: ''
+      brand: 'keebler'
     }),
     Inventory.create({
       name: 'oatmeal',
       description: 'no raisins',
       quantity: 100,
-      brand: 'pillsbury',
-      imageUrl: ''
+      brand: 'pillsbury'
     }),
     Inventory.create({
       name: 'snickerdoodle',
       description: 'a bit better than sugar',
       quantity: 1,
-      brand: 'pepperidge farm',
-      imageUrl: ''
+      brand: 'pepperidge farm'
     }),
     Inventory.create({
       name: 'ginger snap',
       description: 'must have grandchildren to order',
       quantity: 53,
-      brand: 'grandma',
-      imageUrl: ''
+      brand: 'grandma'
     })
   ])
 
