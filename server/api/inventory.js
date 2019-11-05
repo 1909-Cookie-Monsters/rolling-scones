@@ -46,3 +46,17 @@ router.put('/:id', async (req, res, next) => {
     next(error)
   }
 })
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const deleteProduct = await Inventory.findByPk(req.params.id)
+    if (deleteProduct) {
+      await deleteProduct.destroy()
+      res.sendStatus(204)
+    } else {
+      res.sendStatus(404)
+    }
+  } catch (error) {
+    next(error)
+  }
+})
