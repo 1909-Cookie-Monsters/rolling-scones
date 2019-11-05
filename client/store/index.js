@@ -6,7 +6,7 @@ import userReducer from './user'
 import productsReducer from './products'
 
 const rootReducer = combineReducers({
-  users: userReducer,
+  user: userReducer,
   products: productsReducer
 })
 
