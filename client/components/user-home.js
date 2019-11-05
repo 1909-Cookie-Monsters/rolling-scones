@@ -6,11 +6,14 @@ import {connect} from 'react-redux'
  * COMPONENT
  */
 export const UserHome = props => {
-  const {email} = props
+  const {firstName} = props
 
   return (
     <div>
-      <h3>Welcome, {email}</h3>
+      <img src="https://cdn.dribbble.com/users/2362961/screenshots/5526231/44therollingscones_1x.png" />
+      <h3>
+        Established in 2019, The Rolling Scones is the hippest bakery in NYC!{' '}
+      </h3>
     </div>
   )
 }
@@ -20,7 +23,8 @@ export const UserHome = props => {
  */
 const mapState = state => {
   return {
-    email: state.user.email
+    email: state.user.email,
+    firstName: state.user.firstName
   }
 }
 
