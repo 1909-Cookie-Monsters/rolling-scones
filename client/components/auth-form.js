@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
 
+import {Container, Button, Form, Icon} from 'semantic-ui-react'
+
 /**
  * COMPONENT
  */
@@ -11,25 +13,35 @@ const AuthForm = props => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <a href="/auth/google">{displayName} with Google</a>
+      <Container text style={{marginTop: '7em'}}>
+        <Form onSubmit={handleSubmit} name={name}>
+          {displayName === 'Sign Up' ? (
+            <Container>
+              <Form.Field>
+                <label>First Name</label>
+                <input name="firstName" placeholder="First Name" />
+              </Form.Field>
+              <Form.Field>
+                <label>Last Name</label>
+                <input name="lastName" placeholder="Last Name" />
+              </Form.Field>
+            </Container>
+          ) : null}
+          <Form.Field>
+            <label>Email</label>
+            <input name="email" placeholder="Email" />
+          </Form.Field>
+          <Form.Field>
+            <label>Password</label>
+            <input name="password" type="password" placeholder="Password" />
+          </Form.Field>
+          <Button type="submit">{displayName}</Button>
+          {error && error.response && <div> {error.response.data} </div>}
+        </Form>
+        <Button as="a" href="/auth/google" color="google plus">
+          <Icon name="google plus" /> {displayName} with Google
+        </Button>
+      </Container>
     </div>
   )
 }
@@ -64,7 +76,13 @@ const mapDispatch = dispatch => {
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      if (formName === 'signup') {
+        const firstName = evt.target.firstName.value
+        const lastName = evt.target.lastName.value
+        dispatch(auth(email, password, formName, firstName, lastName))
+      } else {
+        dispatch(auth(email, password, formName))
+      }
     }
   }
 }

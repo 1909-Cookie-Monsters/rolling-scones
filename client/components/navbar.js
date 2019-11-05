@@ -4,32 +4,61 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
+import {
+  Container,
+  Divider,
+  Dropdown,
+  Grid,
+  Header,
+  Image,
+  List,
+  Menu,
+  Segment,
+  Button,
+  Icon
+} from 'semantic-ui-react'
+
 const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1>The Rolling Scones</h1>
-    <h3>Can't get no satisfaction? Means you haven't tried our cookies!</h3>
-    <nav>
+  <Menu fixed="top" inverted>
+    <Container>
+      <Menu.Item as="a" header>
+        <Image
+          size="mini"
+          src="https://cdn.dribbble.com/users/2362961/screenshots/5526231/44therollingscones_1x.png"
+          style={{marginRight: '1.5em'}}
+        />
+        The Rolling Scones
+      </Menu.Item>
+      <Menu.Item as={Link} to="/home">
+        Home
+      </Menu.Item>
+      <Menu.Item as={Link} to="/products">
+        Products
+      </Menu.Item>
+      <Menu.Item>
+        <Button as={Link} to="/cart" animated="vertical" compact={true}>
+          <Button.Content hidden>My Cart</Button.Content>
+          <Button.Content visible>
+            <Icon name="shop" />
+          </Button.Content>
+        </Button>
+      </Menu.Item>
       {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <Link to="/products">Products</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
+        <Menu.Item onClick={handleClick} as={Link} to="/home">
+          Logout
+        </Menu.Item>
       ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/home">Home</Link>
-          <Link to="/products">Products</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
+        <Container>
+          <Menu.Item as={Link} to="/login" position="right">
+            Login
+          </Menu.Item>
+          <Menu.Item as={Link} to="/signup" position="right">
+            Sign Up
+          </Menu.Item>
+        </Container>
       )}
-    </nav>
-    <hr />
-  </div>
+    </Container>
+  </Menu>
 )
 
 /**
