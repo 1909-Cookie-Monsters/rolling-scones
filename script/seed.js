@@ -3,14 +3,46 @@
 const db = require('../server/db')
 const {User, Inventory} = require('../server/db/models')
 
+const customers = [
+  {
+    firstName: 'Samantha',
+    lastName: 'Lastig',
+    email: 'slastig@cookiemonsters.com',
+    password: 'cookiesrock'
+  },
+  {
+    firstName: 'Alvin',
+    lastName: 'Togonon',
+    email: 'atogonon@cookiemonsters.com',
+    password: 'abc123'
+  },
+  {
+    firstName: 'Alex',
+    lastName: 'Paul',
+    email: 'apaul@cookiemonster.com',
+    password: 'alexpassword'
+  },
+  {
+    firstName: 'Maxim',
+    lastName: 'Kaloev',
+    email: 'mkaloev@cookiemonsters.com',
+    password: 'maxpass'
+  },
+  {
+    firstName: 'Austin',
+    lastName: 'Wu',
+    email: 'awe@cookiemonsters.com',
+    password: 'austinpassword'
+  }
+]
+
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
+  const users = await Promise.all(
+    customers.map(customer => User.create(customer))
+  )
 
   const dummyInventory = await Promise.all([
     Inventory.create({
