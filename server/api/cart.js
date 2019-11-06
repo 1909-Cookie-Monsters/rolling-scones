@@ -42,13 +42,36 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-// router.put('/:id', async (req, res, next) => {
-//   try {
-//     const shoppingCart = await Order.findByPk(req.params.id)
+router.put('/', async (req, res, next) => {
+  try {
+    let itemToUpdate = await Cart.findOne({
+      where: {
+        orderId: req.body.orderId,
+        productId: req.body.productId
+      }
+    })
+    let updatedItem = await itemToUpdate.update({
+      qty: req.body.qty
+    })
+    res.json(updatedItem)
+  } catch (error) {
+    next(error)
+  }
+})
 
-//   } catch (error) {
-//     next(error)
-//   }
-// })
+router.delete('/', async (req, res, next) => {
+  try {
+    let itemToDelete = await Cart.findOne({
+      where: {
+        orderId: req.body.orderId,
+        productId: req.body.productId
+      }
+    })
+    await itemToDelete.destroy()
+    res.sendStatus(204)
+  } catch (error) {
+    next(error)
+  }
+})
 
 module.exports = router
