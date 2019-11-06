@@ -11,7 +11,7 @@ const Inventory = db.define('product', {
   },
   description: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false // validating not empty
   },
   quantity: {
     type: Sequelize.INTEGER,
@@ -37,6 +37,7 @@ const Inventory = db.define('product', {
   price: {
     type: Sequelize.DECIMAL,
     validate: {
+      // be careful when calculating prices
       min: 0.0
     }
   }

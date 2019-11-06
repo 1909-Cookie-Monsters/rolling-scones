@@ -15,6 +15,7 @@ export const gotSingleProduct = product => ({
 
 export const getAllProductsThunkCreator = () => {
   return async dispatch => {
+    // nice w/ async/await
     try {
       const {data} = await axios.get('/api/products')
       dispatch(gotAllProducts(data))

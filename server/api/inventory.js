@@ -26,6 +26,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
+    // should have something like isAdmin to prevent random people from hitting this route
     const newProduct = await Inventory.create(req.body)
     res.status(201).send(newProduct)
   } catch (error) {
