@@ -41,31 +41,36 @@ const products = [
     name: 'chocolate chip',
     description: 'The chocolatiest chip',
     quantity: 8,
-    brand: 'nestle'
+    brand: 'nestle',
+    price: 3.43
   },
   {
     name: 'sugar',
     description: 'basic',
     quantity: 34,
-    brand: 'keebler'
+    brand: 'keebler',
+    price: 400
   },
   {
     name: 'oatmeal',
     description: 'no raisins',
     quantity: 100,
-    brand: 'pillsbury'
+    brand: 'pillsbury',
+    price: 43
   },
   {
     name: 'snickerdoodle',
     description: 'a bit better than sugar',
     quantity: 1,
-    brand: 'pepperidge farm'
+    brand: 'pepperidge farm',
+    price: 55
   },
   {
     name: 'ginger snap',
     description: 'must have grandchildren to order',
     quantity: 53,
-    brand: 'grandma'
+    brand: 'grandma',
+    price: 12
   }
 ]
 
