@@ -1,7 +1,39 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Inventory} = require('../server/db/models')
+const {User, Inventory, Cart, Order} = require('../server/db/models')
+
+const orders = [
+  {
+    userId: 6
+  },
+  {
+    userId: 5
+  }
+]
+
+const carts = [
+  {
+    orderId: 1,
+    productId: 1,
+    qty: 2
+  },
+  {
+    orderId: 1,
+    productId: 3,
+    qty: 1
+  },
+  {
+    orderId: 1,
+    productId: 2,
+    qty: 2
+  },
+  {
+    orderId: 2,
+    productId: 1,
+    qty: 2
+  }
+]
 
 const customers = [
   {
@@ -33,6 +65,12 @@ const customers = [
     lastName: 'Wu',
     email: 'awe@cookiemonsters.com',
     password: 'austinpassword'
+  },
+  {
+    firstName: 'Cody',
+    lastName: 'Cafe',
+    email: 'cody@email.com',
+    password: '123'
   }
 ]
 
@@ -86,8 +124,16 @@ async function seed() {
     products.map(product => Inventory.create(product))
   )
 
+  const dummyOrders = await Promise.all(
+    orders.map(order => Order.create(order))
+  )
+
+  const dummyCart = await Promise.all(carts.map(cart => Cart.create(cart)))
+
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${inventory.length} inventory`)
+  console.log(`seeded ${dummyOrders.length} orders`)
+  console.log(`seeded ${dummyCart.length} carts`)
   console.log(`seeded successfully`)
 }
 
