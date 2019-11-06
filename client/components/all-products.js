@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import {getAllProductsThunkCreator} from '../store/products'
 import SingleProductLink from './single-product-link'
 
+import AddToCart from './addToCart'
+
 import {
   Container,
   Divider,
@@ -34,6 +36,7 @@ class AllProducts extends Component {
             {this.props.products.map(product => (
               <li key={product.id}>
                 <SingleProductLink {...product} />
+                <AddToCart />
               </li>
             ))}
           </ul>

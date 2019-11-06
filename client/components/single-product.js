@@ -15,6 +15,8 @@ import {
   Icon
 } from 'semantic-ui-react'
 
+import AddToCart from './addToCart'
+
 class SingleProduct extends Component {
   constructor(props) {
     super(props)
@@ -32,6 +34,7 @@ class SingleProduct extends Component {
           <img src={this.props.product.imageUrl} />
           <h4>{this.props.product.description}</h4>
           <h4>Price: ${this.props.product.price}</h4>
+          <AddToCart />
         </Container>
       </div>
     )
