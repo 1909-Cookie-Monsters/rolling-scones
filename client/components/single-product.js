@@ -1,6 +1,19 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getSingleProductsThunkCreator} from '../store/products'
+import {
+  Container,
+  Divider,
+  Dropdown,
+  Grid,
+  Header,
+  Image,
+  List,
+  Menu,
+  Segment,
+  Button,
+  Icon
+} from 'semantic-ui-react'
 
 class SingleProduct extends Component {
   constructor(props) {
@@ -14,10 +27,12 @@ class SingleProduct extends Component {
   render() {
     return (
       <div>
-        <h3>{this.props.product.name}</h3>
-        <img src={this.props.product.imageUrl} />
-        <h4>{this.props.product.description}</h4>
-        <h4>Price: ${this.props.product.price}</h4>
+        <Container text style={{marginTop: '7em'}}>
+          <h3>{this.props.product.name}</h3>
+          <img src={this.props.product.imageUrl} />
+          <h4>{this.props.product.description}</h4>
+          <h4>Price: ${this.props.product.price}</h4>
+        </Container>
       </div>
     )
   }
