@@ -12,8 +12,8 @@ const Cart = require('./cart')
 
 User.hasMany(Order)
 Order.belongsTo(User)
-Order.belongsToMany(Inventory, {through: Cart})
-Inventory.belongsToMany(Order, {through: Cart})
+Order.belongsToMany(Inventory, {through: Cart, foreignKey: 'orderId'})
+Inventory.belongsToMany(Order, {through: Cart, foreignKey: 'productId'})
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
