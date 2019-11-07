@@ -16,7 +16,8 @@ import {
   Menu,
   Segment,
   Button,
-  Icon
+  Icon,
+  Item
 } from 'semantic-ui-react'
 
 class AllProducts extends Component {
@@ -32,14 +33,16 @@ class AllProducts extends Component {
     return (
       <div>
         <Container text style={{marginTop: '7em'}}>
-          <ul>
+          <Item.Group id="allproducts">
             {this.props.products.map(product => (
-              <li key={product.id}>
-                <SingleProductLink {...product} />
-                <AddToCart key={product.id} />
-              </li>
+              <Item key={product.id}>
+                <Container id="singleproduct">
+                  <SingleProductLink {...product} />
+                  <AddToCart key={product.id} product={product} />
+                </Container>
+              </Item>
             ))}
-          </ul>
+          </Item.Group>
         </Container>
       </div>
     )

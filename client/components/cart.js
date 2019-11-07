@@ -47,14 +47,15 @@ class Cart extends Component {
         <Container text style={{marginTop: '7em'}}>
           <Container>
             <Item.Group divided>
-              <ul>
-                {this.props.cart.products &&
-                  this.props.cart.products.map(product => (
-                    <li key={product.id}>
-                      <CartSingleProduct {...product} />
-                    </li>
-                  ))}
-              </ul>
+              {this.props.cart.products ? (
+                this.props.cart.products.map(product => (
+                  <Item key={product.id}>
+                    <CartSingleProduct {...product} />
+                  </Item>
+                ))
+              ) : (
+                <div> "You don't have any items in your cart, yet!</div>
+              )}
             </Item.Group>
           </Container>
 

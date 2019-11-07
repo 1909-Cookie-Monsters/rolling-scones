@@ -19,3 +19,12 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+#allproducts {
+  display: flex;
+}
+
+#singleproduct {
+  /* flex-direction: row; */
+  flex-grow: 3;
+}
