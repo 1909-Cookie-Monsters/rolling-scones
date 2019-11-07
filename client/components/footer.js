@@ -20,10 +20,7 @@ const Footer = () => (
     vertical
     style={{
       margin: '5em 0em 0em',
-      padding: '5em 0em',
-      position: 'absolute',
-      bottom: 0,
-      width: '100%'
+      padding: '5em 0em'
     }}
   >
     <Container textAlign="center">
