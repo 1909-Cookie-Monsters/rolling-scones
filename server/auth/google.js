@@ -1,7 +1,7 @@
 const passport = require('passport')
 const router = require('express').Router()
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
-const {User} = require('../db/models')
+const {User, Order} = require('../db/models')
 module.exports = router
 
 /**
@@ -17,6 +17,10 @@ module.exports = router
  * process.env.GOOGLE_CLIENT_SECRET = 'your google client secret'
  * process.env.GOOGLE_CALLBACK = '/your/google/callback'
  */
+
+if (process.env.NODE_ENV !== 'production') {
+  require('../../secrets')
+}
 
 if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   console.log('Google client ID / secret not found. Skipping Google OAuth.')
@@ -46,11 +50,29 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
     }
   )
 
+  // let newOrder = Order.findOrCreate({
+  //   where: {userId: newUser.id}
+  // })
+  //   .then(([order]) => done(null, order))
+  //   .catch(done)
+  // let createNewOrder = async function () {
+  //   await Order.create({userId: newUser})
+  // }
+  // createNewOrder()
+
   passport.use(strategy)
 
   router.get(
     '/',
-    passport.authenticate('google', {scope: ['email', 'profile']})
+    passport.authenticate('google', {scope: ['email', 'profile']}),
+    async (req, res, next) => {
+      try {
+        //const newOrder = await Order.create({userId: req.user.id})
+        console.log(req.body)
+      } catch (error) {
+        next(error)
+      }
+    }
   )
 
   router.get(

@@ -3,7 +3,7 @@ const {Cart, Order, Inventory} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
-    const shoppingCart = await Order.findOne({
+    let shoppingCart = await Order.findOne({
       where: {
         userId: req.user.id,
         checkedOut: false
@@ -14,6 +14,10 @@ router.get('/', async (req, res, next) => {
         }
       ]
     })
+    // if (shoppingCart === undefined) {
+    //   const newOrder = await Order.create({userId: req.user.id})
+    //   shoppingCart = newOrder
+    // }
     res.json(shoppingCart)
   } catch (error) {
     next(error)
