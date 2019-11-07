@@ -29,6 +29,7 @@ router.post('/', async (req, res, next) => {
         qty: req.body.qty
       }
     })
+
     if (wasCreated === false) {
       let updatedInstance = await instance.update({
         qty: instance.qty + 1
