@@ -4,10 +4,6 @@ import {connect} from 'react-redux'
 import {addProductThunkCreator, getCartThunkCreator} from '../store/cart'
 
 class addToCartButton extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   componentDidMount() {
     this.props.getOrderId()
   }

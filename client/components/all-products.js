@@ -36,8 +36,10 @@ class AllProducts extends Component {
           <Item.Group>
             {this.props.products.map(product => (
               <Item key={product.id}>
-                <SingleProductLink {...product} />
-                <AddToCart key={product.id} product={product} />
+                <Container>
+                  <SingleProductLink {...product} />
+                  <AddToCart key={product.id} product={product} />
+                </Container>
               </Item>
             ))}
           </Item.Group>

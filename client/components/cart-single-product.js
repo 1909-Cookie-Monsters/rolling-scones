@@ -16,6 +16,7 @@ import {
 } from 'semantic-ui-react'
 
 const CartSingleProduct = props => {
+  console.log(props)
   return (
     <div>
       <Item.Image

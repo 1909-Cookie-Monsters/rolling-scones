@@ -5,10 +5,22 @@ const {User, Inventory, Cart, Order} = require('../server/db/models')
 
 const orders = [
   {
-    userId: 6
+    userId: 1
+  },
+  {
+    userId: 2
+  },
+  {
+    userId: 3
+  },
+  {
+    userId: 4
   },
   {
     userId: 5
+  },
+  {
+    userId: 6
   }
 ]
 
