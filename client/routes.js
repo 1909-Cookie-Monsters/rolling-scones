@@ -6,6 +6,7 @@ import {Login, Signup, UserHome} from './components'
 import {me} from './store'
 import AllProducts from './components/all-products'
 import SingleProduct from './components/single-product'
+import Cart from './components/cart'
 
 /**
  * COMPONENT
@@ -26,6 +27,7 @@ class Routes extends Component {
         <Route exact path="/home" component={UserHome} />
         <Route exact path="/products/:id" component={SingleProduct} />
         <Route exact path="/products" component={AllProducts} />
+        <Route path="/cart" component={Cart} />
         <Route exact path="/" component={UserHome} />
         {isLoggedIn && (
           <Switch>
