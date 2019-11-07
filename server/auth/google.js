@@ -64,15 +64,7 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 
   router.get(
     '/',
-    passport.authenticate('google', {scope: ['email', 'profile']}),
-    async (req, res, next) => {
-      try {
-        //const newOrder = await Order.create({userId: req.user.id})
-        console.log(req.body)
-      } catch (error) {
-        next(error)
-      }
-    }
+    passport.authenticate('google', {scope: ['email', 'profile']})
   )
 
   router.get(
