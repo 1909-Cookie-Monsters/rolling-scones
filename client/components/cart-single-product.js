@@ -17,18 +17,17 @@ import {
 
 const CartSingleProduct = props => {
   return (
-    <Item>
-      <Item.Image src="https://media.istockphoto.com/photos/anzac-biscuit-isolated-clipping-path-picture-id183764572" />
+    <div>
+      <Item.Image
+        size="small"
+        src="https://media.istockphoto.com/photos/anzac-biscuit-isolated-clipping-path-picture-id183764572"
+      />
       <Item.Content>
         <Item.Header as="a">{props.name}</Item.Header>
         <Item.Meta>
-          <span>Date</span>
-          <span>Category</span>
+          <p>{props.brand}</p>
         </Item.Meta>
-        <Item.Description>
-          A description which may flow for several lines and give context to the
-          content.
-        </Item.Description>
+        <Item.Description>{props.description}</Item.Description>
         <Item.Extra>
           <CartQuantityButton />
           <Button.Group size="mini" floated="right" color="red">
@@ -39,7 +38,7 @@ const CartSingleProduct = props => {
           </Button.Group>
         </Item.Extra>
       </Item.Content>
-    </Item>
+    </div>
   )
 }
 export default CartSingleProduct

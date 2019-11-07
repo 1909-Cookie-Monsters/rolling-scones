@@ -25,8 +25,8 @@ router.post('/', async (req, res, next) => {
     const [instance, wasCreated] = await Cart.findOrCreate({
       where: {
         orderId: req.body.orderId,
-        productId: req.body.productId,
-        qty: req.body.qty
+        productId: req.body.productId
+        // qty: req.body.qty
       }
     })
 

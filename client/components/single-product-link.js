@@ -20,6 +20,7 @@ const SingleProductLink = props => {
     <div>
       <Container text style={{marginTop: '7em'}}>
         <Link to={`/products/${props.id}`}> {props.name} </Link>
+        <Image size="small" src={props.imageUrl} />
       </Container>
     </div>
   )
