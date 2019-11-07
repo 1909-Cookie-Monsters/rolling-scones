@@ -33,11 +33,13 @@ class AllProducts extends Component {
     return (
       <div>
         <Container text style={{marginTop: '7em'}}>
-          <Item.Group>
+          <Item.Group id="allproducts">
             {this.props.products.map(product => (
               <Item key={product.id}>
-                <SingleProductLink {...product} />
-                <AddToCart key={product.id} product={product} />
+                <Container id="singleproduct">
+                  <SingleProductLink {...product} />
+                  <AddToCart key={product.id} product={product} />
+                </Container>
               </Item>
             ))}
           </Item.Group>

@@ -3,7 +3,7 @@ const {Cart, Order, Inventory} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
-    const shoppingCart = await Order.findOne({
+    let shoppingCart = await Order.findOne({
       where: {
         userId: req.user.id,
         checkedOut: false
@@ -14,6 +14,10 @@ router.get('/', async (req, res, next) => {
         }
       ]
     })
+    // if (shoppingCart === undefined) {
+    //   const newOrder = await Order.create({userId: req.user.id})
+    //   shoppingCart = newOrder
+    // }
     res.json(shoppingCart)
   } catch (error) {
     next(error)
@@ -22,11 +26,13 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
+    const item = await Inventory.findByPk(req.body.productId)
     const [instance, wasCreated] = await Cart.findOrCreate({
       where: {
         orderId: req.body.orderId,
-        productId: req.body.productId
-        // qty: req.body.qty
+        productId: req.body.productId,
+        // qty: req.body.qty,
+        price: item.price
       }
     })
 

@@ -19,7 +19,8 @@ class addToCartButton extends React.Component {
           onClick={() =>
             this.props.addToCart({
               orderId: this.props.orderId,
-              productId: this.props.product.id
+              productId: this.props.product.id,
+              price: this.props.product.price
             })
           }
           icon
