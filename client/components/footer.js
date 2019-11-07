@@ -28,7 +28,7 @@ const Footer = () => (
   >
     <Container textAlign="center">
       <Divider inverted section />
-      <Image centered size="mini" src="../../public/smallLogo.png" />
+      <Image centered size="mini" />
       <List horizontal inverted divided link size="small">
         <List.Item as="a" href="#">
           Site Map
