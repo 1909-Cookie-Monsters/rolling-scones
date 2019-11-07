@@ -20,15 +20,12 @@ const Footer = () => (
     vertical
     style={{
       margin: '5em 0em 0em',
-      padding: '5em 0em',
-      position: 'absolute',
-      bottom: 0,
-      width: '100%'
+      padding: '5em 0em'
     }}
   >
     <Container textAlign="center">
       <Divider inverted section />
-      <Image centered size="mini" src="../../public/smallLogo.png" />
+      <Image centered size="mini" />
       <List horizontal inverted divided link size="small">
         <List.Item as="a" href="#">
           Site Map
