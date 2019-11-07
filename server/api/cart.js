@@ -22,11 +22,13 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
+    const item = await Inventory.findByPk(req.body.productId)
     const [instance, wasCreated] = await Cart.findOrCreate({
       where: {
         orderId: req.body.orderId,
         productId: req.body.productId,
-        qty: req.body.qty
+        qty: req.body.qty,
+        price: item.price
       }
     })
 

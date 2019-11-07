@@ -5,6 +5,13 @@ const Cart = db.define('cart', {
   qty: {
     type: Sequelize.INTEGER,
     defaultValue: 0
+  },
+  price: {
+    type: Sequelize.DECIMAL,
+    defaultValue: 0,
+    validate: {
+      min: 0.0
+    }
   }
 })
 
