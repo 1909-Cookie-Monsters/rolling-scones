@@ -51,7 +51,7 @@ class Cart extends Component {
                 {this.props.cart.products &&
                   this.props.cart.products.map(product => (
                     <li key={product.id}>
-                      <CartSingleProduct />
+                      <CartSingleProduct {...product} />
                     </li>
                   ))}
               </ul>
