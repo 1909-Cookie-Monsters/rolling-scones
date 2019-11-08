@@ -47,7 +47,8 @@ class Cart extends Component {
         <Container text style={{marginTop: '7em'}}>
           <Container>
             <Item.Group divided>
-              {this.props.cart.products ? (
+              {this.props.cart.products &&
+              this.props.cart.products.length > 0 ? (
                 this.props.cart.products.map(product => (
                   <Item key={product.id}>
                     <CartSingleProduct {...product} />
