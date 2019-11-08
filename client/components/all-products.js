@@ -38,6 +38,7 @@ class AllProducts extends Component {
               <Item key={product.id}>
                 <Container id="singleproduct">
                   <SingleProductLink {...product} />
+                  <Item.Extra>Price: ${product.price}</Item.Extra>
                   <AddToCart key={product.id} product={product} />
                 </Container>
               </Item>

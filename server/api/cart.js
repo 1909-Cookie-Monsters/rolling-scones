@@ -35,7 +35,6 @@ router.post('/', async (req, res, next) => {
         price: item.price
       }
     })
-
     if (wasCreated === false) {
       let updatedInstance = await instance.update({
         qty: instance.qty + 1

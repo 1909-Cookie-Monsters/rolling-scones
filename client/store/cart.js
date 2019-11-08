@@ -2,6 +2,8 @@ import axios from 'axios'
 
 export const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART'
 export const GET_ALL_PRODUCTS_IN_CART = 'GET_ALL_PRODUCTS_IN_CART'
+export const REMOVE_PRODUCT_FROM_CART = 'REMOVE_PRODUCT_FROM_CART'
+export const UPDATE_PRODUCT_IN_CART = 'UPDATE_PRODUCT_IN_CART'
 
 export const addedProduct = product => ({
   type: ADD_PRODUCT_TO_CART,
@@ -12,6 +14,35 @@ export const gotCart = products => {
   return {
     type: GET_ALL_PRODUCTS_IN_CART,
     products
+  }
+}
+
+export const removeProduct = productId => {
+  return {
+    type: REMOVE_PRODUCT_FROM_CART,
+    productId
+  }
+}
+
+export const updateProductThunk = obj => {
+  return async dispatch => {
+    try {
+      await axios.put('/api/cart', obj)
+      dispatch(getCartThunkCreator())
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+export const removeProductThunk = obj => {
+  return async dispatch => {
+    try {
+      await axios.delete('/api/cart', {data: obj})
+      dispatch(getCartThunkCreator())
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
 
