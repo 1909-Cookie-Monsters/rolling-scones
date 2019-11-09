@@ -75,7 +75,7 @@ class Cart extends Component {
             </Item.Group>
           </Container>
           <Container textAlign="right">
-            Subtotal: ${this.props.subtotal}
+            Subtotal: ${this.props.subtotal.toFixed(2)}
           </Container>
           <CheckoutButton subtotal={this.props.subtotal} />
         </Container>
