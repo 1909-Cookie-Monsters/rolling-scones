@@ -4,11 +4,19 @@ export const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART'
 export const GET_ALL_PRODUCTS_IN_CART = 'GET_ALL_PRODUCTS_IN_CART'
 export const REMOVE_PRODUCT_FROM_CART = 'REMOVE_PRODUCT_FROM_CART'
 export const UPDATE_PRODUCT_IN_CART = 'UPDATE_PRODUCT_IN_CART'
+export const UPDATE_SUBTOTAL = 'UPDATE_SUBTOTAL'
 
 export const addedProduct = product => ({
   type: ADD_PRODUCT_TO_CART,
   product
 })
+
+export const updateSubtotal = subtotal => {
+  return {
+    type: UPDATE_SUBTOTAL,
+    subtotal
+  }
+}
 
 export const gotCart = products => {
   return {
@@ -72,6 +80,15 @@ const cartReducer = (state = [], action) => {
   switch (action.type) {
     case GET_ALL_PRODUCTS_IN_CART:
       return action.products
+    default:
+      return state
+  }
+}
+
+export const subTotalReducer = (state = 0, action) => {
+  switch (action.type) {
+    case UPDATE_SUBTOTAL:
+      return action.subtotal
     default:
       return state
   }

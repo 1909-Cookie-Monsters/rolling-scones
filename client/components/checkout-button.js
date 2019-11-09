@@ -5,7 +5,7 @@ import {updateProductThunk} from '../store/cart'
 
 class CheckoutButton extends React.Component {
   render() {
-    console.log('this is oredr to update', this.props)
+    console.log('this is oredr to update', this.props.subtotal)
     return (
       <div>
         <Button
@@ -14,7 +14,8 @@ class CheckoutButton extends React.Component {
           onClick={() =>
             this.props.updateProduct({
               checkedOut: this.props.cart.checkedOut,
-              userId: this.props.cart.userId
+              userId: this.props.cart.userId,
+              totalPrice: this.props.subtotal
             })
           }
         >

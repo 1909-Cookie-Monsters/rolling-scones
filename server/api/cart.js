@@ -62,6 +62,7 @@ router.put('/', async (req, res, next) => {
         }
       })
       await cartCheckOut.update({
+        totalPrice: req.body.totalPrice,
         checkedOut: true
       })
       await Order.create({userId: req.body.userId})
