@@ -50,16 +50,31 @@ router.post('/', async (req, res, next) => {
 
 router.put('/', async (req, res, next) => {
   try {
-    let itemToUpdate = await Cart.findOne({
-      where: {
-        orderId: req.body.orderId,
-        productId: req.body.productId
-      }
-    })
-    let updatedItem = await itemToUpdate.update({
-      qty: req.body.qty
-    })
-    res.json(updatedItem)
+    //checkOut button update Order Status and create new Order for User, requires userId to pass if statement
+    if (req.body.userId) {
+      let cartCheckOut = await Order.findOne({
+        where: {
+          userId: req.body.userId,
+          checkedOut: false
+        }
+      })
+      await cartCheckOut.update({
+        checkedOut: true
+      })
+      await Order.create({userId: req.body.userId})
+      res.sendStatus(201)
+    } else {
+      let itemToUpdate = await Cart.findOne({
+        where: {
+          orderId: req.body.orderId,
+          productId: req.body.productId
+        }
+      })
+      let updatedItem = await itemToUpdate.update({
+        qty: req.body.qty
+      })
+      res.json(updatedItem)
+    }
   } catch (error) {
     next(error)
   }
