@@ -14,6 +14,10 @@ router.get('/', async (req, res, next) => {
         }
       ]
     })
+    if (!shoppingCart) {
+      console.log('req --------->>>>>>>>>>', req.body)
+      shoppingCart = await Order.create({userId: req.user.id})
+    }
     // if (shoppingCart === undefined) {
     //   const newOrder = await Order.create({userId: req.user.id})
     //   shoppingCart = newOrder
