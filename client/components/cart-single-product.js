@@ -51,7 +51,7 @@ class CartSingleProduct extends React.Component {
               </Button>
             </Button.Group>
             <Container textAlign="right">
-              ${this.props.price * this.props.cart.qty}
+              ${(this.props.price * this.props.cart.qty).toFixed(2)}
             </Container>
           </Item.Extra>
         </Item.Content>
