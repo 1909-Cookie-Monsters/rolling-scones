@@ -9,7 +9,6 @@ class CartQuantityButton extends React.Component {
   }
 
   render() {
-    console.log(`cartQty props:`, this.props)
     return (
       <Button.Group size="mini">
         <Button

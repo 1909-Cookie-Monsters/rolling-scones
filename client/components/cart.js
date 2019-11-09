@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getCartThunkCreator} from '../store/cart'
+import {getCartThunkCreator, updateSubtotal} from '../store/cart'
 import CartSingleProduct from './cart-single-product'
 import CheckoutButton from './checkout-button'
 
@@ -39,8 +39,22 @@ class Cart extends Component {
   componentDidMount() {
     this.props.getCartThunkCreator()
   }
+
+  componentDidUpdate() {
+    let subtotal = 0
+
+    {
+      this.props.cart.products &&
+        this.props.cart.products.forEach(
+          item => (subtotal += item.cart.qty * item.cart.price)
+        )
+    }
+
+    this.props.updateSubtotal(subtotal)
+  }
+
   render() {
-    console.log(this.props)
+    console.log(`prop`, this.props)
 
     return (
       <div>
@@ -55,25 +69,13 @@ class Cart extends Component {
                   </Item>
                 ))
               ) : (
-                <div> "You don't have any items in your cart, yet!</div>
+                <div> You don't have any items in your cart, yet!</div>
               )}
             </Item.Group>
           </Container>
-
-          {/* <Header as='h3' content='Responsive Steps' style={style.h3} textAlign='center' />
-
-    <Container style={style.last}>
-      <Step.Group fluid>
-        <Step icon='plane' title='Shipping' description='Choose your shipping options' />
-        <Step active icon='dollar' title='Billing' description='Enter billing information' />
-        <Step
-          disabled
-          icon='info circle'
-          title='Confirm Order'
-          description='Verify order details'
-        />
-      </Step.Group>
-    </Container> */}
+          <Container textAlign="right">
+            Subtotal: ${this.props.subtotal}
+          </Container>
           <CheckoutButton />
         </Container>
       </div>
@@ -82,11 +84,13 @@ class Cart extends Component {
 }
 
 const mapStateToProps = state => ({
-  cart: state.cart
+  cart: state.cart,
+  subtotal: state.subtotal
 })
 
 const mapDispatchToProps = dispatch => ({
-  getCartThunkCreator: () => dispatch(getCartThunkCreator())
+  getCartThunkCreator: () => dispatch(getCartThunkCreator()),
+  updateSubtotal: subtotal => dispatch(updateSubtotal(subtotal))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart)
