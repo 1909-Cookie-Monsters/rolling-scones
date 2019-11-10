@@ -2,6 +2,17 @@ const router = require('express').Router()
 const {User, Order} = require('../db/models')
 module.exports = router
 
+const isAdminMiddleware = (req, res, next) => {
+  const currentUser = req.user
+  if (currentUser && currentUser.isAdmin) {
+    next()
+  } else {
+    const error = new Error('Unauthorized user')
+    error.status = 401
+    next(error)
+  }
+}
+
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
@@ -29,7 +40,7 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', isAdminMiddleware, async (req, res, next) => {
   try {
     const newUser = await User.create({
       firstName: req.body.firstName,
@@ -44,11 +55,19 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', isAdminMiddleware, async (req, res, next) => {
   try {
     const userUpdate = await User.findByPk(req.params.id)
     if (userUpdate) {
-      const newUser = await userUpdate.update(req.body)
+      const newUser = await userUpdate.update({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        shippingAddress: req.body.shippingAddress,
+        billingAddress: req.body.billingAddress,
+        email: req.body.email,
+        paymentInfo: req.body.paymentInfo,
+        password: req.body.password
+      })
       res.status(200).send(newUser)
     } else {
       res.sendStatus(404)
@@ -58,7 +77,7 @@ router.put('/:id', async (req, res, next) => {
   }
 })
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', isAdminMiddleware, async (req, res, next) => {
   try {
     const deleteUser = await User.findByPk(req.params.id)
     if (deleteUser) {
