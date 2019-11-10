@@ -13,6 +13,7 @@ class CheckoutButton extends React.Component {
           attached="bottom"
           color="green"
           onClick={() =>
+            this.props.subtotal &&
             this.props.updateProduct({
               checkedOut: this.props.cart.checkedOut,
               userId: this.props.cart.userId,
