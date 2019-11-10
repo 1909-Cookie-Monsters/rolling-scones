@@ -1,6 +1,7 @@
 import React from 'react'
 import {Button, Segment} from 'semantic-ui-react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {updateProductThunk} from '../store/cart'
 
 class CheckoutButton extends React.Component {
@@ -18,6 +19,8 @@ class CheckoutButton extends React.Component {
               totalPrice: this.props.subtotal
             })
           }
+          as={Link}
+          to="/order_completed"
         >
           {' '}
           Proceed to Checkout!
