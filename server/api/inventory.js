@@ -26,7 +26,14 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const newProduct = await Inventory.create(req.body)
+    const newProduct = await Inventory.create({
+      name: req.body.name,
+      description: req.body.description,
+      quantity: req.body.quantity,
+      brand: req.body.brand,
+      imageUrl: req.body.imageUrl,
+      price: req.body.price
+    })
     res.status(201).send(newProduct)
   } catch (error) {
     next(error)
