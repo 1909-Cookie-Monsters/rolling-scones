@@ -79,7 +79,7 @@ class Cart extends Component {
   }
 
   render() {
-    console.log(`prop-------->`, this.props)
+    console.log('Trying to get user---->', this)
 
     return (
       <div>

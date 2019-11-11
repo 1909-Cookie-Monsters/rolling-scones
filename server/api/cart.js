@@ -17,10 +17,7 @@ router.get('/', async (req, res, next) => {
     if (!shoppingCart) {
       shoppingCart = await Order.create({userId: req.user.id})
     }
-    // if (shoppingCart === undefined) {
-    //   const newOrder = await Order.create({userId: req.user.id})
-    //   shoppingCart = newOrder
-    // }
+
     res.json(shoppingCart)
   } catch (error) {
     next(error)
@@ -34,7 +31,6 @@ router.post('/', async (req, res, next) => {
       where: {
         orderId: req.body.orderId,
         productId: req.body.productId,
-        // qty: req.body.qty,
         price: item.price
       }
     })
