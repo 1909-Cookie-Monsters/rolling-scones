@@ -21,6 +21,9 @@ const orders = [
   },
   {
     userId: 6
+  },
+  {
+    userId: 7
   }
 ]
 
@@ -83,6 +86,13 @@ const customers = [
     lastName: 'Cafe',
     email: 'cody@email.com',
     password: '123'
+  },
+  {
+    firstName: 'Admin',
+    lastName: 'AdminLast',
+    email: 'admin@email.com',
+    password: '123',
+    isAdmin: true
   }
 ]
 

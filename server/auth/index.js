@@ -22,7 +22,12 @@ router.post('/login', async (req, res, next) => {
 
 router.post('/signup', async (req, res, next) => {
   try {
-    const user = await User.create(req.body)
+    const user = await User.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password
+    })
     const newOrder = await Order.create({userId: user.id})
     req.login(user, err => (err ? next(err) : res.json(user)))
   } catch (err) {
