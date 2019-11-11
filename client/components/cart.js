@@ -55,8 +55,6 @@ class Cart extends Component {
   }
 
   render() {
-    console.log('Trying to get user---->', this)
-
     return (
       <div>
         <Container text style={{marginTop: '7em'}}>
@@ -64,11 +62,18 @@ class Cart extends Component {
             <Item.Group divided>
               {this.props.cart.products &&
               this.props.cart.products.length > 0 ? (
-                this.props.cart.products.map(product => (
-                  <Item key={product.id}>
-                    <CartSingleProduct {...product} />
-                  </Item>
-                ))
+                this.props.cart.products.map(product => {
+                  return (
+                    <Item key={product.id}>
+                      <CartSingleProduct
+                        subsubtotal={Number(
+                          product.cart.price * product.cart.qty
+                        )}
+                        {...product}
+                      />
+                    </Item>
+                  )
+                })
               ) : (
                 <div> You don't have any items in your cart, yet!</div>
               )}
