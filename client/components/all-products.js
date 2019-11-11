@@ -32,7 +32,7 @@ class AllProducts extends Component {
   }
 
   render() {
-    console.log('order.id', this.props.orderId)
+    //console.log('order.id', this.props.orderId)
     return (
       <div>
         <Container text style={{marginTop: '7em'}}>
