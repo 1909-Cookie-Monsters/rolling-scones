@@ -46,6 +46,7 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
         defaults: {email, imgUrl, firstName, lastName, fullName}
       })
         .then(([user]) => done(null, user))
+
         .catch(done)
     }
   )

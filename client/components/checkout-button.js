@@ -1,13 +1,50 @@
 import React from 'react'
 import {Button, Segment} from 'semantic-ui-react'
+import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
+import {updateProductThunk} from '../store/cart'
 
-const CheckoutButton = () => (
-  <div>
-    <Button attached="bottom" color="green">
-      {' '}
-      Proceed to Checkout!
-    </Button>
-  </div>
-)
+class CheckoutButton extends React.Component {
+  render() {
+    return (
+      <div>
+        {this.props.subtotal !== 0 ? (
+          <Button
+            attached="bottom"
+            color="green"
+            onClick={() =>
+              this.props.updateProduct({
+                checkedOut: this.props.cart.checkedOut,
+                userId: this.props.cart.userId,
+                totalPrice: this.props.subtotal
+              })
+            }
+            as={Link}
+            to="/order_completed"
+          >
+            {' '}
+            Proceed to Checkout!
+          </Button>
+        ) : (
+          <Button attached="bottom" color="red">
+            {' '}
+            Please Add an Item to Cart to Checkout
+          </Button>
+        )}
+      </div>
+    )
+  }
+}
+const getState = state => {
+  return {
+    cart: state.cart
+  }
+}
 
-export default CheckoutButton
+const getDispatch = dispatch => {
+  return {
+    updateProduct: obj => dispatch(updateProductThunk(obj))
+  }
+}
+
+export default connect(getState, getDispatch)(CheckoutButton)

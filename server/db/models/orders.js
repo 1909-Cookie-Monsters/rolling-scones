@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
-const Cart = require('./cart')
+// const Cart = require('./cart')
 
 const Order = db.define('order', {
   checkedOut: {

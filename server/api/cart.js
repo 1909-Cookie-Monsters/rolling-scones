@@ -14,10 +14,10 @@ router.get('/', async (req, res, next) => {
         }
       ]
     })
-    // if (shoppingCart === undefined) {
-    //   const newOrder = await Order.create({userId: req.user.id})
-    //   shoppingCart = newOrder
-    // }
+    if (!shoppingCart) {
+      shoppingCart = await Order.create({userId: req.user.id})
+    }
+
     res.json(shoppingCart)
   } catch (error) {
     next(error)
@@ -31,7 +31,6 @@ router.post('/', async (req, res, next) => {
       where: {
         orderId: req.body.orderId,
         productId: req.body.productId,
-        // qty: req.body.qty,
         price: item.price
       }
     })
@@ -50,16 +49,32 @@ router.post('/', async (req, res, next) => {
 
 router.put('/', async (req, res, next) => {
   try {
-    let itemToUpdate = await Cart.findOne({
-      where: {
-        orderId: req.body.orderId,
-        productId: req.body.productId
-      }
-    })
-    let updatedItem = await itemToUpdate.update({
-      qty: req.body.qty
-    })
-    res.json(updatedItem)
+    //checkOut button update Order Status and create new Order for User, requires userId to pass if statement
+    if (req.body.userId) {
+      let cartCheckOut = await Order.findOne({
+        where: {
+          userId: req.body.userId,
+          checkedOut: false
+        }
+      })
+      await cartCheckOut.update({
+        totalPrice: req.body.totalPrice,
+        checkedOut: true
+      })
+      await Order.create({userId: req.body.userId})
+      res.sendStatus(201)
+    } else {
+      let itemToUpdate = await Cart.findOne({
+        where: {
+          orderId: req.body.orderId,
+          productId: req.body.productId
+        }
+      })
+      let updatedItem = await itemToUpdate.update({
+        qty: req.body.qty
+      })
+      res.json(updatedItem)
+    }
   } catch (error) {
     next(error)
   }

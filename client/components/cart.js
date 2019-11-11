@@ -49,12 +49,13 @@ class Cart extends Component {
           item => (subtotal += item.cart.qty * item.cart.price)
         )
     }
-
-    this.props.updateSubtotal(subtotal)
+    if (subtotal >= 0) {
+      this.props.updateSubtotal(subtotal)
+    }
   }
 
   render() {
-    console.log(`prop`, this.props)
+    console.log('Trying to get user---->', this)
 
     return (
       <div>
@@ -74,9 +75,9 @@ class Cart extends Component {
             </Item.Group>
           </Container>
           <Container textAlign="right">
-            Subtotal: ${this.props.subtotal}
+            Subtotal: ${this.props.subtotal.toFixed(2)}
           </Container>
-          <CheckoutButton />
+          <CheckoutButton subtotal={this.props.subtotal} />
         </Container>
       </div>
     )
