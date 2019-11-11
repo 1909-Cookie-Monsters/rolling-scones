@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getAllProductsThunkCreator} from '../store/products'
+import {getCartThunkCreator} from '../store/cart'
 import SingleProductLink from './single-product-link'
 
 import AddToCart from './addToCart'
@@ -27,9 +28,11 @@ class AllProducts extends Component {
 
   componentDidMount() {
     this.props.getAllProductsThunkCreator()
+    this.props.getOrderId()
   }
 
   render() {
+    console.log('order.id', this.props.orderId)
     return (
       <div>
         <Container text style={{marginTop: '7em'}}>
@@ -51,11 +54,13 @@ class AllProducts extends Component {
 }
 
 const mapStateToProps = state => ({
-  products: state.products.allProducts
+  products: state.products.allProducts,
+  orderId: state.cart.id
 })
 
 const mapDispatchToProps = dispatch => ({
-  getAllProductsThunkCreator: () => dispatch(getAllProductsThunkCreator())
+  getAllProductsThunkCreator: () => dispatch(getAllProductsThunkCreator()),
+  getOrderId: () => dispatch(getCartThunkCreator())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllProducts)

@@ -6,7 +6,7 @@ import {updateProductThunk} from '../store/cart'
 
 class CheckoutButton extends React.Component {
   render() {
-    console.log('this is oredr to update', this.props.subtotal)
+    console.log('this is oredr to update', this.props)
     return (
       <div>
         {this.props.subtotal !== 0 ? (
@@ -27,7 +27,7 @@ class CheckoutButton extends React.Component {
             Proceed to Checkout!
           </Button>
         ) : (
-          <Button attached="bottom" color="light green">
+          <Button attached="bottom" color="red">
             {' '}
             Please Add an Item to Cart to Checkout
           </Button>
