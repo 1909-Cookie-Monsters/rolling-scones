@@ -6,26 +6,31 @@ import {updateProductThunk} from '../store/cart'
 
 class CheckoutButton extends React.Component {
   render() {
-    console.log('this is oredr to update', this.props.subtotal)
     return (
       <div>
-        <Button
-          attached="bottom"
-          color="green"
-          onClick={() =>
-            this.props.subtotal &&
-            this.props.updateProduct({
-              checkedOut: this.props.cart.checkedOut,
-              userId: this.props.cart.userId,
-              totalPrice: this.props.subtotal
-            })
-          }
-          as={Link}
-          to="/order_completed"
-        >
-          {' '}
-          Proceed to Checkout!
-        </Button>
+        {this.props.subtotal !== 0 ? (
+          <Button
+            attached="bottom"
+            color="green"
+            onClick={() =>
+              this.props.updateProduct({
+                checkedOut: this.props.cart.checkedOut,
+                userId: this.props.cart.userId,
+                totalPrice: this.props.subtotal
+              })
+            }
+            as={Link}
+            to="/order_completed"
+          >
+            {' '}
+            Proceed to Checkout!
+          </Button>
+        ) : (
+          <Button attached="bottom" color="red">
+            {' '}
+            Please Add an Item to Cart to Checkout
+          </Button>
+        )}
       </div>
     )
   }

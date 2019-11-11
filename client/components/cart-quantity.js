@@ -1,16 +1,10 @@
 import React from 'react'
 import {Button} from 'semantic-ui-react'
 import {connect} from 'react-redux'
-import {updateProductThunk, getCartThunkCreator} from '../store/cart'
+import {updateProductThunk} from '../store/cart'
 
 class CartQuantityButton extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
-    console.log(`cartQty props:`, this.props)
-
     return (
       <Button.Group size="mini">
         <Button
