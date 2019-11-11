@@ -31,10 +31,10 @@ class SingleProduct extends Component {
       <div>
         <Container text style={{marginTop: '7em'}}>
           <h3>{this.props.product.name}</h3>
-          <img src={this.props.product.imageUrl} />
+          <Image size="medium" src={this.props.product.imageUrl} />
           <h4>{this.props.product.description}</h4>
           <h4>Price: ${this.props.product.price}</h4>
-          <AddToCart />
+          <AddToCart key={this.props.product.id} product={this.props.product} />
         </Container>
       </div>
     )
