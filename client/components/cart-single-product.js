@@ -1,7 +1,8 @@
-import React, {Component} from 'react'
+import React from 'react'
 import CartQuantityButton from './cart-quantity'
 import {connect} from 'react-redux'
 import {removeProductThunk} from '../store/cart'
+import {Link} from 'react-router-dom'
 
 import {
   Button,
@@ -25,21 +26,18 @@ class CartSingleProduct extends React.Component {
 
   render() {
     return (
-      <div>
-        <Item.Image
-          size="small"
-          src="https://media.istockphoto.com/photos/anzac-biscuit-isolated-clipping-path-picture-id183764572"
-        />
+      <Container>
         <Item.Content>
-          <Item.Header as="a">{this.props.name}</Item.Header>
-          <Item.Meta>
-            <p>{this.props.brand}</p>
-          </Item.Meta>
-          <Item.Description>{this.props.description}</Item.Description>
+          <Item.Header as={Link} to={`/products/${this.props.cart.productId}`}>
+            {this.props.name}
+          </Item.Header>
+          <div>
+            <Item.Image size="small" src={this.props.imageUrl} />
+          </div>
           <Item.Extra>Price: ${this.props.price}</Item.Extra>
           <Item.Extra>
-            <CartQuantityButton product={this.props.cart} />
-            <Button.Group size="mini" floated="right" color="red">
+            <CartQuantityButton floated="left" product={this.props.cart} />{' '}
+            <Button.Group size="mini" color="red">
               <Button
                 onClick={() =>
                   this.props.removeItem({
@@ -52,16 +50,13 @@ class CartSingleProduct extends React.Component {
                 <Icon name="chevron right" />
               </Button>
             </Button.Group>
+            <Container textAlign="right">
+              ${(this.props.price * this.props.cart.qty).toFixed(2)}
+            </Container>
           </Item.Extra>
         </Item.Content>
-      </div>
+      </Container>
     )
-  }
-}
-
-const mapState = state => {
-  return {
-    state
   }
 }
 
@@ -71,4 +66,4 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(CartSingleProduct)
+export default connect(null, mapDispatch)(CartSingleProduct)

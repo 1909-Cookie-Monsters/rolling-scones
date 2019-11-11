@@ -98,39 +98,54 @@ const customers = [
 
 const products = [
   {
-    name: 'chocolate chip',
-    description: 'The chocolatiest chip',
+    name: 'Chocolate Chip Scone',
+    description:
+      "Mick Jagger's all time favorite scone! This buttery and chocolatey scone will bring it's eaters SATISFACTION!",
     quantity: 8,
-    brand: 'nestle',
-    price: 3.43
+    brand: 'Scone',
+    imageUrl:
+      'https://prettysimplesweet.com/wp-content/uploads/2018/10/Chocolate_Chip_Scones.jpg',
+    price: 3.5
   },
   {
-    name: 'sugar',
-    description: 'basic',
+    name: 'Blueberry Scone with Vanilla Drizzle',
+    description:
+      "Keith Richard's has said this scone is what gets his morning started! This blueberry delight will have you running back for more!",
     quantity: 34,
-    brand: 'keebler',
-    price: 400
+    brand: 'Scone',
+    imageUrl:
+      'https://cdn.sallysbakingaddiction.com/wp-content/uploads/2014/07/blueberry-scones-with-icing.jpg',
+    price: 4.0
   },
   {
-    name: 'oatmeal',
-    description: 'no raisins',
+    name: 'Bacon, Pepper Jack, and Jalapeno Scone',
+    description:
+      "If you're a savory breakfast lover, this scone will change your life!",
     quantity: 100,
-    brand: 'pillsbury',
-    price: 43
+    brand: 'Scone',
+    imageUrl:
+      'https://bakerbynature.com/wp-content/uploads/2015/03/IMG_8526-2.jpg',
+    price: 4.5
   },
   {
-    name: 'snickerdoodle',
-    description: 'a bit better than sugar',
-    quantity: 1,
-    brand: 'pepperidge farm',
-    price: 55
+    name: 'Classic Pumpkin Scone (Seasonal!)',
+    description:
+      'Your favorite seasonal breakfast is now available through November!',
+    quantity: 50,
+    brand: 'Scone',
+    imageUrl:
+      'https://www.theflavorbender.com/wp-content/uploads/2019/09/Pumpkin-Scones-3811-780x1169.jpg',
+    price: 4.5
   },
   {
-    name: 'ginger snap',
-    description: 'must have grandchildren to order',
+    name: 'Cream Scone',
+    description:
+      'Our play on an original, plain scone - this scone is classic, simple yet still moist and delicious!',
     quantity: 53,
-    brand: 'grandma',
-    price: 12
+    brand: 'Scone',
+    imageUrl:
+      'https://www.platingsandpairings.com/wp-content/uploads/2015/10/Honey-Cream-Scones-17.jpg',
+    price: 3.5
   }
 ]
 

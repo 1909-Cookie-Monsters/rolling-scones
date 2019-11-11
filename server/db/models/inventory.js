@@ -35,7 +35,7 @@ const Inventory = db.define('product', {
       'https://media.istockphoto.com/photos/anzac-biscuit-isolated-clipping-path-picture-id183764572'
   },
   price: {
-    type: Sequelize.DECIMAL,
+    type: Sequelize.DECIMAL(10, 2),
     validate: {
       min: 0.0
     }

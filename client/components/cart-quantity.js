@@ -4,12 +4,7 @@ import {connect} from 'react-redux'
 import {updateProductThunk} from '../store/cart'
 
 class CartQuantityButton extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
-    console.log(`cartQty props:`, this.props)
     return (
       <Button.Group size="mini">
         <Button
