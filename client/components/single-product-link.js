@@ -17,11 +17,16 @@ import {
 
 const SingleProductLink = props => {
   return (
-    <div>
-      <Container text style={{marginTop: '7em'}}>
-        <Link to={`/products/${props.id}`}> {props.name} </Link>
-        <Image size="small" src={props.imageUrl} />
-      </Container>
+    <div className="singleProductLink">
+      <Link to={`/products/${props.id}`} className="productTitle">
+        {' '}
+        {props.name}{' '}
+      </Link>
+      <Image
+        size="small"
+        src={props.imageUrl}
+        className="singleProductPicture"
+      />
     </div>
   )
 }

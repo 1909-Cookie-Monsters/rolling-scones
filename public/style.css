@@ -22,9 +22,33 @@ form div {
 
 #allproducts {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
-#singleproduct {
-  /* flex-direction: row; */
-  flex-grow: 3;
+.singleProductLink {
+  display: flex;
+  width: 150px;
+  flex-wrap: wrap;
+  margin-top: 100px;
+  height: 350x;
+}
+
+.productTitle {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  /* flex-wrap: wrap; */
+  width: 150px;
+  height: 50px;
+}
+
+.singleProductPicture {
+  display: flex;
+  border-radius: 10px;
+}
+
+#signupButton {
+  margin-left: 5px;
 }
