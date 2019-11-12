@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
+import axios from 'axios'
 import {connect} from 'react-redux'
-import {getCartThunkCreator, updateSubtotal} from '../store/cart'
+import {getCartThunkCreator} from '../store/cart'
+import {updateSubtotal} from '../store/subtotal'
 import CartSingleProduct from './cart-single-product'
 import CheckoutButton from './checkout-button'
 import guestCart from './guest-cart'
@@ -41,9 +43,12 @@ class Cart extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      guestCart: []
+      guestCart: [],
+      retrievedItems: []
     }
     this.getGuestCart = this.getGuestCart.bind(this)
+    this.getGuestCartItemsFromDb = this.getGuestCartItemsFromDb.bind(this)
+    this.dbCall = this.dbCall.bind(this)
   }
 
   componentDidMount() {
@@ -52,7 +57,10 @@ class Cart extends Component {
   }
 
   componentDidUpdate() {
-    console.log('state ==>', this.state)
+    //console.log('state ==>', this.state)
+    // let itemsAfterCall = this.getGuestCartItemsFromDb()[0]
+    // this.setState({retrievedItems: itemsAfterCall})
+    console.log('new State ==>', this.state)
     let subtotal = 0
 
     {
@@ -78,44 +86,87 @@ class Cart extends Component {
     //console.log('local guest cart --->', localGuestCart)
   }
 
-  render() {
-    console.log('Trying to get user---->', this)
+  getGuestCartItemsFromDb() {
+    let guestCartItems = []
+    let itemsOnState = this.state.guestCart
+    //console.log('state -->', this.state)
+    // console.log('itemsOnState ==>',itemsOnState)
 
-    return (
-      <div>
-        {this.props.cart.id ? (
+    itemsOnState[0].forEach(item => {
+      // console.log("item -->", item)
+      let infoFromDb = this.dbCall(item.productId)
+      guestCartItems.push(infoFromDb)
+    })
+    //console.log('array of retrieved data -->', guestCartItems)
+    return guestCartItems
+  }
+
+  async dbCall(item) {
+    try {
+      let {data} = await axios.get(`/api/products/${item}`)
+      //console.log('data -->', data)
+      return data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  render() {
+    console.log('updated state -->', this.state)
+    if (this.props.cart.id) {
+      return (
+        <div>
           <Container text style={{marginTop: '7em'}}>
             <Container>
               <Item.Group divided>
                 {this.props.cart.products &&
                 this.props.cart.products.length > 0 ? (
-                  this.props.cart.products.map(product => (
-                    <Item key={product.id}>
-                      <CartSingleProduct {...product} />
-                    </Item>
-                  ))
+                  this.props.cart.products.map(product => {
+                    return (
+                      <Item key={product.id}>
+                        <CartSingleProduct
+                          subsubtotal={Number(
+                            product.cart.price * product.cart.qty
+                          )}
+                          {...product}
+                        />
+                      </Item>
+                    )
+                  })
                 ) : (
                   <div> You don't have any items in your cart, yet!</div>
                 )}
               </Item.Group>
             </Container>
             <Container textAlign="right">
-              Subtotal: ${this.props.subtotal.toFixed(2)}
+              Subtotal: ${this.props.subtotal}
             </Container>
             <CheckoutButton subtotal={this.props.subtotal} />
           </Container>
-        ) : (
+        </div>
+      )
+    } else {
+      return (
+        <div>
           <Container text style={{marginTop: '7em'}}>
             <Container>
               <Item.Group divided>
-                {this.state.guestCart && this.state.guestCart > 0 ? (
-                  this.props.cart.products.map(product => (
-                    <Item key={product.id}>
-                      <CartSingleProduct {...product} />
-                    </Item>
-                  ))
+                {this.props.cart.products &&
+                this.props.cart.products.length > 0 ? (
+                  this.props.cart.products.map(product => {
+                    return (
+                      <Item key={product.id}>
+                        <CartSingleProduct
+                          subsubtotal={Number(
+                            product.cart.price * product.cart.qty
+                          )}
+                          {...product}
+                        />
+                      </Item>
+                    )
+                  })
                 ) : (
-                  <div> its this one</div>
+                  <div> this is guest cart</div>
                 )}
               </Item.Group>
             </Container>
@@ -124,9 +175,9 @@ class Cart extends Component {
             </Container>
             <CheckoutButton subtotal={this.props.subtotal} />
           </Container>
-        )}
-      </div>
-    )
+        </div>
+      )
+    }
   }
 }
 

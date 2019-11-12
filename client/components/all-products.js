@@ -34,20 +34,14 @@ class AllProducts extends Component {
   render() {
     //console.log('order.id', this.props.orderId)
     return (
-      <div>
-        <Container text style={{marginTop: '7em'}}>
-          <Item.Group id="allproducts">
-            {this.props.products.map(product => (
-              <Item key={product.id}>
-                <Container id="singleproduct">
-                  <SingleProductLink {...product} />
-                  <Item.Extra>Price: ${product.price}</Item.Extra>
-                  <AddToCart key={product.id} product={product} />
-                </Container>
-              </Item>
-            ))}
-          </Item.Group>
-        </Container>
+      <div id="allproducts">
+        {this.props.products.map(product => (
+          <div key={product.id} id="singleproduct">
+            <SingleProductLink {...product} />
+            <Item>Price: ${product.price}</Item>
+            <AddToCart key={product.id} product={product} />
+          </div>
+        ))}
       </div>
     )
   }
@@ -64,3 +58,25 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllProducts)
+
+// return (
+//   <div id = "allproducts">
+//     <Container text style={{marginTop: '7em'}}>
+//       <Item.Group id="allproducts">
+//         <Grid columns={3} stackable>
+//           {this.props.products.map(product => (
+//             <Grid.Column key={product.id}>
+//               <Item>
+//                 <Container id="singleproduct">
+//                   <SingleProductLink {...product} />
+//                   <Item.Extra>Price: ${product.price}</Item.Extra>
+//                   <AddToCart key={product.id} product={product} />
+//                 </Container>
+//               </Item>
+//             </Grid.Column>
+//           ))}
+//         </Grid>
+//       </Item.Group>
+//     </Container>
+//   </div>
+// )

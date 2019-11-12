@@ -11,7 +11,6 @@ const Cart = db.define('cart', {
   },
   price: {
     type: Sequelize.DECIMAL,
-    defaultValue: 0,
     validate: {
       min: 0.0
     }
