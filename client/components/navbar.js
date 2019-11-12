@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import {clearedCart} from '../store/cart'
 
 import {
   Container,
@@ -73,6 +74,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     handleClick() {
+      dispatch(clearedCart())
       dispatch(logout())
     }
   }

@@ -5,12 +5,14 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import userReducer from './user'
 import productsReducer from './products'
 import cartReducer, {subTotalReducer} from './cart.js'
+import guestCartReducer from './guestcart'
 
 const rootReducer = combineReducers({
   user: userReducer,
   products: productsReducer,
   cart: cartReducer,
-  subtotal: subTotalReducer
+  subtotal: subTotalReducer,
+  guestCart: guestCartReducer
 })
 
 const middleware = composeWithDevTools(

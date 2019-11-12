@@ -6,6 +6,14 @@ export const REMOVE_PRODUCT_FROM_CART = 'REMOVE_PRODUCT_FROM_CART'
 export const UPDATE_PRODUCT_IN_CART = 'UPDATE_PRODUCT_IN_CART'
 export const UPDATE_SUBTOTAL = 'UPDATE_SUBTOTAL'
 
+const CLEAR_CART = 'CLEAR_CART'
+
+export const clearedCart = () => {
+  return {
+    type: CLEAR_CART
+  }
+}
+
 export const addedProduct = product => ({
   type: ADD_PRODUCT_TO_CART,
   product
@@ -100,6 +108,8 @@ const cartReducer = (state = [], action) => {
         return product
       })
       return {...state, products: updatedState}
+    case CLEAR_CART:
+      return []
     default:
       return state
   }
