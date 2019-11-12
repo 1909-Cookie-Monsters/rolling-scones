@@ -97,6 +97,7 @@ class Cart extends Component {
               <Item.Group divided>
                 {this.props.guestCart && this.props.guestCart.length > 0 ? (
                   this.props.guestCart.map(product => {
+                    console.log(`product:`, product)
                     return (
                       <Item key={product.id}>
                         <CartSingleProduct {...product} />
@@ -122,7 +123,7 @@ class Cart extends Component {
 const mapStateToProps = state => ({
   cart: state.cart,
   subtotal: state.subtotal,
-  state
+  guestCart: state.guestCart
 })
 
 const mapDispatchToProps = dispatch => ({

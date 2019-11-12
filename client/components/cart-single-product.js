@@ -25,36 +25,64 @@ class CartSingleProduct extends React.Component {
   }
 
   render() {
+    console.log(`single item cart props`, this.props)
     return (
       <Container>
-        <Item.Content>
-          <Item.Header as={Link} to={`/products/${this.props.cart.productId}`}>
-            {this.props.name}
-          </Item.Header>
-          <div>
-            <Item.Image size="small" src={this.props.imageUrl} />
-          </div>
-          <Item.Extra>Price: ${this.props.price}</Item.Extra>
-          <Item.Extra>
-            <CartQuantityButton floated="left" product={this.props.cart} />{' '}
-            <Button.Group size="mini" color="red">
-              <Button
-                onClick={() =>
-                  this.props.removeItem({
-                    orderId: this.props.cart.orderId,
-                    productId: this.props.cart.productId
-                  })
-                }
-              >
-                Remove
-                <Icon name="chevron right" />
-              </Button>
-            </Button.Group>
-            <Container textAlign="right">
-              ${this.props.subsubtotal.toFixed(2)}
-            </Container>
-          </Item.Extra>
-        </Item.Content>
+        {this.props.user.id ? (
+          <Item.Content>
+            <Item.Header
+              as={Link}
+              to={`/products/${this.props.cart.productId}`}
+            >
+              {this.props.name}
+            </Item.Header>
+            <div>
+              <Item.Image size="small" src={this.props.imageUrl} />
+            </div>
+            <Item.Extra>Price: ${this.props.price}</Item.Extra>
+            <Item.Extra>
+              <CartQuantityButton floated="left" product={this.props.cart} />{' '}
+              <Button.Group size="mini" color="red">
+                <Button
+                  onClick={() =>
+                    this.props.removeItem({
+                      orderId: this.props.cart.orderId,
+                      productId: this.props.cart.productId
+                    })
+                  }
+                >
+                  Remove
+                  <Icon name="chevron right" />
+                </Button>
+              </Button.Group>
+              <Container textAlign="right">
+                ${this.props.subsubtotal.toFixed(2)}
+              </Container>
+            </Item.Extra>
+          </Item.Content>
+        ) : (
+          <Item.Content>
+            <Item.Header as={Link} to={`/products/${this.props.id}`}>
+              {this.props.name}
+            </Item.Header>
+            <div>
+              <Item.Image size="small" src={this.props.imageUrl} />
+            </div>
+            <Item.Extra>Price: ${this.props.price}</Item.Extra>
+            <Item.Extra>
+              <CartQuantityButton floated="left" {...this.props} />{' '}
+              <Button.Group size="mini" color="red">
+                <Button>
+                  Remove
+                  <Icon name="chevron right" />
+                </Button>
+              </Button.Group>
+              {/* <Container textAlign="right">
+                ${this.props.subsubtotal.toFixed(2)}
+              </Container> */}
+            </Item.Extra>
+          </Item.Content>
+        )}
       </Container>
     )
   }
@@ -66,4 +94,10 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(null, mapDispatch)(CartSingleProduct)
+const mapState = state => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapState, mapDispatch)(CartSingleProduct)
