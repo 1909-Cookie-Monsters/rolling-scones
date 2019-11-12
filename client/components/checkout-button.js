@@ -6,18 +6,22 @@ import {updateProductThunk} from '../store/cart'
 
 class CheckoutButton extends React.Component {
   render() {
+    console.log(`checkout props`, this.props)
     return (
       <div>
         {this.props.subtotal !== 0 ? (
           <Button
             attached="bottom"
             color="green"
-            onClick={() =>
-              this.props.updateProduct({
-                checkedOut: this.props.cart.checkedOut,
-                userId: this.props.cart.userId,
-                totalPrice: this.props.subtotal
-              })
+            onClick={
+              this.props.cart.id
+                ? () =>
+                    this.props.updateProduct({
+                      checkedOut: this.props.cart.checkedOut,
+                      userId: this.props.cart.userId,
+                      totalPrice: this.props.subtotal
+                    })
+                : () => localStorage.clear()
             }
             as={Link}
             to="/order_completed"
@@ -37,7 +41,8 @@ class CheckoutButton extends React.Component {
 }
 const getState = state => {
   return {
-    cart: state.cart
+    cart: state.cart,
+    guestCart: state.guestCart
   }
 }
 

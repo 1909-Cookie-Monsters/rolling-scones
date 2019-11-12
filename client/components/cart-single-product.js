@@ -3,6 +3,8 @@ import CartQuantityButton from './cart-quantity'
 import {connect} from 'react-redux'
 import {removeProductThunk} from '../store/cart'
 import {Link} from 'react-router-dom'
+import GuestQuantity from './guestQuantity'
+import {removeItemGC} from '../store/guestcart'
 
 import {
   Button,
@@ -22,6 +24,17 @@ import {
 class CartSingleProduct extends React.Component {
   constructor(props) {
     super(props)
+  }
+
+  removefromlocal(id) {
+    let products = []
+
+    if (localStorage.getItem('guestCart')) {
+      products = JSON.parse(localStorage.getItem('guestCart'))
+    }
+    let newProducts = products.filter(element => element.id !== id)
+
+    localStorage.setItem('guestCart', JSON.stringify(newProducts))
   }
 
   render() {
@@ -70,16 +83,21 @@ class CartSingleProduct extends React.Component {
             </div>
             <Item.Extra>Price: ${this.props.price}</Item.Extra>
             <Item.Extra>
-              <CartQuantityButton floated="left" {...this.props} />{' '}
+              <GuestQuantity floated="left" {...this.props} />{' '}
               <Button.Group size="mini" color="red">
-                <Button>
+                <Button
+                  onClick={() => {
+                    this.removefromlocal(this.props.id)
+                    this.props.removeItemGC(this.props.id)
+                  }}
+                >
                   Remove
                   <Icon name="chevron right" />
                 </Button>
               </Button.Group>
-              {/* <Container textAlign="right">
+              <Container textAlign="right">
                 ${this.props.subsubtotal.toFixed(2)}
-              </Container> */}
+              </Container>
             </Item.Extra>
           </Item.Content>
         )}
@@ -90,7 +108,8 @@ class CartSingleProduct extends React.Component {
 
 const mapDispatch = dispatch => {
   return {
-    removeItem: obj => dispatch(removeProductThunk(obj))
+    removeItem: obj => dispatch(removeProductThunk(obj)),
+    removeItemGC: id => dispatch(removeItemGC(id))
   }
 }
 

@@ -38,10 +38,10 @@ const style = {
 
 class Cart extends Component {
   componentDidMount() {
-    if (this.props.cart.id) {
-      this.props.getCartThunkCreator()
-    } else {
+    if (!this.props.user.id) {
       this.props.retrieveGC(JSON.parse(localStorage.getItem('guestCart')))
+    } else {
+      this.props.getCartThunkCreator()
     }
   }
 
@@ -54,6 +54,11 @@ class Cart extends Component {
           item => (subtotal += item.cart.qty * item.cart.price)
         )
     }
+
+    if (!this.props.user.id) {
+      this.props.guestCart.forEach(item => (subtotal += item.qty * +item.price))
+    }
+
     if (subtotal >= 0) {
       this.props.updateSubtotal(subtotal)
     }
@@ -97,10 +102,12 @@ class Cart extends Component {
               <Item.Group divided>
                 {this.props.guestCart && this.props.guestCart.length > 0 ? (
                   this.props.guestCart.map(product => {
-                    console.log(`product:`, product)
                     return (
                       <Item key={product.id}>
-                        <CartSingleProduct {...product} />
+                        <CartSingleProduct
+                          subsubtotal={Number(product.price * product.qty)}
+                          {...product}
+                        />
                       </Item>
                     )
                   })
@@ -123,7 +130,8 @@ class Cart extends Component {
 const mapStateToProps = state => ({
   cart: state.cart,
   subtotal: state.subtotal,
-  guestCart: state.guestCart
+  guestCart: state.guestCart,
+  user: state.user
 })
 
 const mapDispatchToProps = dispatch => ({
