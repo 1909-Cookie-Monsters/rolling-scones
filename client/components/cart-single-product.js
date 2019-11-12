@@ -50,7 +50,11 @@ class CartSingleProduct extends React.Component {
               {this.props.name}
             </Item.Header>
             <div>
-              <Item.Image size="small" src={this.props.imageUrl} />
+              <Image
+                size="small"
+                src={this.props.imageUrl}
+                className="singleProductPicture"
+              />
             </div>
             <Item.Extra>Price: ${this.props.price}</Item.Extra>
             <Item.Extra>
@@ -79,7 +83,11 @@ class CartSingleProduct extends React.Component {
               {this.props.name}
             </Item.Header>
             <div>
-              <Item.Image size="small" src={this.props.imageUrl} />
+              <Image
+                size="small"
+                src={this.props.imageUrl}
+                className="singleProductPicture"
+              />
             </div>
             <Item.Extra>Price: ${this.props.price}</Item.Extra>
             <Item.Extra>
