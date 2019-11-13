@@ -6,7 +6,6 @@ import {updateProductThunk} from '../store/cart'
 
 class CheckoutButton extends React.Component {
   render() {
-    console.log(`checkout props`, this.props)
     return (
       <div>
         {this.props.subtotal !== 0 ? (

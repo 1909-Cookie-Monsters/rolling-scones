@@ -25,8 +25,6 @@ class addToCartButton extends React.Component {
   }
 
   render() {
-    console.log(`props`, this.props)
-    console.log(`localStorage`, JSON.parse(localStorage.getItem('guestCart')))
     return (
       <div>
         {this.props.user.id ? (

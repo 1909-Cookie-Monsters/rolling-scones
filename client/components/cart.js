@@ -65,7 +65,6 @@ class Cart extends Component {
   }
 
   render() {
-    console.log('this is comming from cart', this.props)
     return (
       <div>
         {this.props.cart.id ? (

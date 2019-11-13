@@ -38,7 +38,6 @@ class CartSingleProduct extends React.Component {
   }
 
   render() {
-    console.log(`single item cart props`, this.props)
     return (
       <Container>
         {this.props.user.id ? (

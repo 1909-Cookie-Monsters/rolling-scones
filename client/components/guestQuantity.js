@@ -35,7 +35,6 @@ class GuestQuantity extends React.Component {
   }
 
   render() {
-    console.log(`guestquantity`, this.props)
     return (
       <Button.Group size="mini">
         <Button
