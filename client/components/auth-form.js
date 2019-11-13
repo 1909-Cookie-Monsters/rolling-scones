@@ -14,14 +14,14 @@ const AuthForm = props => {
   return (
     <div>
       <Container text style={{marginTop: '7em'}}>
-        <Form onSubmit={handleSubmit} name={name}>
+        <Form onSubmit={handleSubmit} name={name} className="authForm">
           {displayName === 'Sign Up' ? (
             <Container>
-              <Form.Field>
+              <Form.Field className="nameFields">
                 <label>First Name</label>
                 <input name="firstName" placeholder="First Name" />
               </Form.Field>
-              <Form.Field>
+              <Form.Field className="nameFields">
                 <label>Last Name</label>
                 <input name="lastName" placeholder="Last Name" />
               </Form.Field>
@@ -36,11 +36,11 @@ const AuthForm = props => {
             <input name="password" type="password" placeholder="Password" />
           </Form.Field>
           <Button type="submit">{displayName}</Button>
+          <Button as="a" href="/auth/google" color="google plus">
+            <Icon name="google plus" /> {displayName} with Google
+          </Button>
           {error && error.response && <div> {error.response.data} </div>}
         </Form>
-        <Button as="a" href="/auth/google" color="google plus">
-          <Icon name="google plus" /> {displayName} with Google
-        </Button>
       </Container>
     </div>
   )
