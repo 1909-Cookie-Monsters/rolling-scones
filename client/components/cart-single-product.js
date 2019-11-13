@@ -5,6 +5,7 @@ import {removeProductThunk} from '../store/cart'
 import {Link} from 'react-router-dom'
 import GuestQuantity from './guestQuantity'
 import {removeItemGC} from '../store/guestcart'
+import {getCartThunkCreator} from '../store/cart'
 
 import {
   Button,
@@ -24,6 +25,12 @@ import {
 class CartSingleProduct extends React.Component {
   constructor(props) {
     super(props)
+  }
+
+  componentDidMount() {
+    if (this.props.user.id) {
+      this.props.getOrderId()
+    }
   }
 
   removefromlocal(id) {
@@ -117,7 +124,8 @@ class CartSingleProduct extends React.Component {
 const mapDispatch = dispatch => {
   return {
     removeItem: obj => dispatch(removeProductThunk(obj)),
-    removeItemGC: id => dispatch(removeItemGC(id))
+    removeItemGC: id => dispatch(removeItemGC(id)),
+    getOrderId: () => dispatch(getCartThunkCreator())
   }
 }
 

@@ -91,7 +91,7 @@ export const getCartThunkCreator = () => {
   }
 }
 
-const cartReducer = (state = [], action) => {
+const cartReducer = (state = {}, action) => {
   switch (action.type) {
     case GET_ALL_PRODUCTS_IN_CART:
       return action.products
@@ -109,7 +109,7 @@ const cartReducer = (state = [], action) => {
       })
       return {...state, products: updatedState}
     case CLEAR_CART:
-      return []
+      return {...state, products: []}
     default:
       return state
   }
