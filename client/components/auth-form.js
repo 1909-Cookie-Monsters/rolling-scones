@@ -69,7 +69,7 @@ const mapSignup = state => {
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch, props) => {
   return {
     handleSubmit(evt) {
       evt.preventDefault()
@@ -82,6 +82,7 @@ const mapDispatch = dispatch => {
         dispatch(auth(email, password, formName, firstName, lastName))
       } else {
         dispatch(auth(email, password, formName))
+        props.history.push('/products')
       }
     }
   }

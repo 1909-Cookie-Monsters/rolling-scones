@@ -71,11 +71,12 @@ const mapState = state => {
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch, props) => {
   return {
     handleClick() {
       dispatch(clearedCart())
       dispatch(logout())
+      props.history.push('/products')
     }
   }
 }
